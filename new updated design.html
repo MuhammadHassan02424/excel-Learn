@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExcelLearn | Next-Gen Learning</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Modern Color Palette */
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #564FD9;
+            --secondary: #FF6584;
+            --accent: #00D1B2;
+            --dark: #2D3748;
+            --light: #F7FAFC;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9ff;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* Floating Background Elements */
+        .bg-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+
+        .blob-1 {
+            background: var(--primary);
+            top: -200px;
+            right: -200px;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .blob-2 {
+            background: var(--secondary);
+            bottom: -200px;
+            left: -200px;
+            animation: float 18s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 50px); }
+        }
+
+        /* Glowing Effects */
+        .glow {
+            box-shadow: 0 0 15px rgba(108, 99, 255, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glow:hover {
+            box-shadow: 0 0 25px rgba(108, 99, 255, 0.5);
+        }
+
+        /* Modern Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        /* Holographic Nav */
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Futuristic Buttons */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section with Parallax Effect */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .hero-bg {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            max-width: 700px;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Floating Cards */
+        .floating-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .floating-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .floating-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            z-index: -1;
+            transition: opacity 0.3s ease;
+        }
+
+        .floating-card:hover::before {
+            opacity: 0.05;
+        }
+
+        /* Course Cards with 3D Effect */
+        .course-card {
+            perspective: 1000px;
+            width: 100%;
+            height: 300px;
+        }
+
+        .course-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-card:hover .course-inner {
+            transform: rotateY(180deg);
+        }
+
+        .course-front, .course-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-front {
+            background: white;
+        }
+
+        .course-back {
+            background: var(--gradient);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .course-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .course-back .course-icon {
+            color: white;
+        }
+
+        /* Glassmorphism Elements */
+        .glass-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animated Stats */
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        /* Testimonial Carousel */
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 5rem;
+            color: rgba(108, 99, 255, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        /* Floating Animation */
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-bg {
+                opacity: 0.3;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero {
+                text-align: center;
+                padding-top: 100px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero-bg {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <!-- Futuristic Header -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            <span>ExcelLearn</span>
+        </a>
+        
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Courses</a>
+            <a href="#">Features</a>
+            <a href="#">Testimonials</a>
+            <a href="#">Contact</a>
+        </div>
+        
+        <div class="nav-cta">
+            <button class="btn btn-secondary">Login</button>
+            <button class="btn btn-primary">Sign Up</button>
+        </div>
+    </header>
+
+    <!-- Hero Section with Floating Illustration -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transform Your Future With Immersive Learning</h1>
+            <p>Experience education reimagined with our cutting-edge platform that combines AI-powered learning with human mentorship for unparalleled results.</p>
+            <div style="display: flex; gap: 15px;">
+                <button class="btn btn-primary">Explore Courses</button>
+                <button class="btn btn-secondary">
+                    <i class="fas fa-play"></i> Watch Demo
+                </button>
+            </div>
+        </div>
+        <img src="https://cdn.dribbble.com/users/1787323/screenshots/11310765/media/7d7e79a1d1a1a8a7f5e8e5b5d5c5b5a5.png" alt="Learning Illustration" class="hero-bg floating">
+    </section>
+
+    <!-- Features Section -->
+    <section style="padding: 100px 10%; background: white;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 15px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Why ExcelLearn Stands Out</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: #666;">We've redefined online education with innovative features that make learning engaging, effective, and enjoyable.</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <!-- Feature Card 1 -->
+            <div class="floating-card">
+                <div style="width: 60px; height: 60px; background: rgba(108, 99, 255, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <i class="fas fa-brain" style="font-size: 1.5rem; color: var(--primary);"></i>
+                </div>
+                <h3 style="margin-bottom: 15px;">AI-Powered Learning</h3>
+                <p style="color: #666;">Our adaptive learning algorithms personalize content to match your pace and learning style.</p>
+            </div>
+            
+            <!-- Feature Card 2 -->
+            <div class="floating-card">
+                <div style="width: 60px; height: 60px; background: rgba(108, 99, 255, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <i class="fas fa-vr-cardboard" style="font-size: 1.5rem; color: var(--primary);"></i>
+                </div>
+                <h3 style="margin-bottom: 15px;">Immersive Labs</h3>
+                <p style="color: #666;">Practice in realistic virtual environments with our VR and AR enabled labs.</p>
+            </div>
+            
+            <!-- Feature Card 3 -->
+            <div class="floating-card">
+                <div style="width: 60px; height: 60px; background: rgba(108, 99, 255, 0.1); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                    <i class="fas fa-chart-line" style="font-size: 1.5rem; color: var(--primary);"></i>
+                </div>
+                <h3 style="margin-bottom: 15px;">Real-Time Analytics</h3>
+                <p style="color: #666;">Track your progress with detailed analytics and personalized recommendations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Courses Section -->
+    <section style="padding: 100px 10%; background: #f9f9ff;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 15px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Our Flagship Courses</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: #666;">Hands-on courses designed by industry experts to give you the competitive edge.</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <!-- Course 1 - 3D Flip Card -->
+            <div class="course-card">
+                <div class="course-inner">
+                    <div class="course-front">
+                        <i class="fas fa-code course-icon"></i>
+                        <h3 style="margin-bottom: 15px;">Full Stack Development</h3>
+                        <p style="color: #666; margin-bottom: 20px;">Master both frontend and backend technologies to build complete web applications.</p>
+                        <div style="display: flex; justify-content: space-between; color: var(--primary); font-weight: 600;">
+                            <span>12 Weeks</span>
+                            <span>$499</span>
+                        </div>
+                    </div>
+                    <div class="course-back">
+                        <i class="fas fa-code course-icon"></i>
+                        <div>
+                            <h3 style="margin-bottom: 15px;">What You'll Learn</h3>
+                            <ul style="list-style: none; margin-bottom: 20px;">
+                                <li style="margin-bottom: 8px;">• HTML, CSS, JavaScript</li>
+                                <li style="margin-bottom: 8px;">• React & Node.js</li>
+                                <li style="margin-bottom: 8px;">• Database Design</li>
+                                <li style="margin-bottom: 8px;">• Deployment & DevOps</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-secondary" style="background: white; color: var(--primary);">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Course 2 - 3D Flip Card -->
+            <div class="course-card">
+                <div class="course-inner">
+                    <div class="course-front">
+                        <i class="fas fa-robot course-icon"></i>
+                        <h3 style="margin-bottom: 15px;">AI & Machine Learning</h3>
+                        <p style="color: #666; margin-bottom: 20px;">Build intelligent systems and predictive models with Python and TensorFlow.</p>
+                        <div style="display: flex; justify-content: space-between; color: var(--primary); font-weight: 600;">
+                            <span>16 Weeks</span>
+                            <span>$699</span>
+                        </div>
+                    </div>
+                    <div class="course-back">
+                        <i class="fas fa-robot course-icon"></i>
+                        <div>
+                            <h3 style="margin-bottom: 15px;">What You'll Learn</h3>
+                            <ul style="list-style: none; margin-bottom: 20px;">
+                                <li style="margin-bottom: 8px;">• Python for Data Science</li>
+                                <li style="margin-bottom: 8px;">• Neural Networks</li>
+                                <li style="margin-bottom: 8px;">• Computer Vision</li>
+                                <li style="margin-bottom: 8px;">• NLP Techniques</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-secondary" style="background: white; color: var(--primary);">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Course 3 - 3D Flip Card -->
+            <div class="course-card">
+                <div class="course-inner">
+                    <div class="course-front">
+                        <i class="fas fa-chart-pie course-icon"></i>
+                        <h3 style="margin-bottom: 15px;">Data Science</h3>
+                        <p style="color: #666; margin-bottom: 20px;">Turn data into insights with statistical analysis and visualization techniques.</p>
+                        <div style="display: flex; justify-content: space-between; color: var(--primary); font-weight: 600;">
+                            <span>14 Weeks</span>
+                            <span>$599</span>
+                        </div>
+                    </div>
+                    <div class="course-back">
+                        <i class="fas fa-chart-pie course-icon"></i>
+                        <div>
+                            <h3 style="margin-bottom: 15px;">What You'll Learn</h3>
+                            <ul style="list-style: none; margin-bottom: 20px;">
+                                <li style="margin-bottom: 8px;">• Data Wrangling</li>
+                                <li style="margin-bottom: 8px;">• Statistical Modeling</li>
+                                <li style="margin-bottom: 8px;">• Data Visualization</li>
+                                <li style="margin-bottom: 8px;">• Big Data Tools</li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-secondary" style="background: white; color: var(--primary);">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section style="padding: 80px 10%; background: var(--gradient); color: white; text-align: center;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+            <div class="stat-item">
+                <div class="stat-number" style="-webkit-text-fill-color: white;">10,000+</div>
+                <p>Students Enrolled</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" style="-webkit-text-fill-color: white;">98%</div>
+                <p>Satisfaction Rate</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" style="-webkit-text-fill-color: white;">500+</div>
+                <p>Hours of Content</p>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" style="-webkit-text-fill-color: white;">50+</div>
+                <p>Industry Experts</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section style="padding: 100px 10%; background: white;">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 15px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Success Stories</h2>
+            <p style="max-width: 700px; margin: 0 auto; color: #666;">Don't just take our word for it - hear from our students.</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div class="testimonial-card">
+                <p style="font-style: italic; margin-bottom: 20px; position: relative; z-index: 1;">"ExcelLearn completely transformed my career. The hands-on projects gave me the portfolio I needed to land my dream job at Google."</p>
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--primary); margin-right: 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">SM</div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Sarah Mitchell</h4>
+                        <p style="color: var(--primary); font-size: 0.9rem;">Software Engineer @ Google</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p style="font-style: italic; margin-bottom: 20px; position: relative; z-index: 1;">"The AI mentor was like having a personal tutor available 24/7. I learned in 3 months what would have taken me a year on my own."</p>
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--secondary); margin-right: 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">JR</div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">James Rodriguez</h4>
+                        <p style="color: var(--secondary); font-size: 0.9rem;">Data Scientist @ Tesla</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <p style="font-style: italic; margin-bottom: 20px; position: relative; z-index: 1;">"The VR coding environments made learning so immersive. I felt like I was working in a real tech company during the course."</p>
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--accent); margin-right: 15px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">AP</div>
+                    <div>
+                        <h4 style="margin-bottom: 5px;">Aisha Patel</h4>
+                        <p style="color: var(--accent); font-size: 0.9rem;">Full Stack Developer @ Airbnb</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section with Glassmorphism -->
+    <section style="padding: 100px 10%; background: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(108, 99, 255, 0.7); z-index: 0;"></div>
+        <div class="glass-card" style="max-width: 800px; margin: 0 auto; text-align: center; position: relative; z-index: 1; color: white;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Ready to Transform Your Career?</h2>
+            <p style="margin-bottom: 30px; opacity: 0.9;">Join thousands of students who have accelerated their careers with ExcelLearn. Start your journey today.</p>
+            <button class="btn btn-primary" style="background: white; color: var(--primary); font-weight: 600;">Get Started For Free</button>
+        </div>
+    </section>
+
+    <!-- Futuristic Footer -->
+    <footer style="padding: 80px 10% 30px; background: var(--dark); color: white;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px;">
+            <div>
+                <h3 style="margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center;">
+                    <i class="fas fa-graduation-cap" style="margin-right: 10px; color: var(--primary);"></i>
+                    ExcelLearn
+                </h3>
+                <p style="opacity: 0.7; line-height: 1.6;">The future of education is here. Learn smarter, not harder.</p>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 20px; color: var(--primary);">Quick Links</h4>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none; opacity: 0.7; transition: opacity 0.3s ease;">Home</a></li>
+                    <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none; opacity: 0.7; transition: opacity 0.3s ease;">Courses</a></li>
+                    <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none; opacity: 0.7; transition: opacity 0.3s ease;">About Us</a></li>
+                    <li style="margin-bottom: 10px;"><a href="#" style="color: white; text-decoration: none; opacity: 0.7; transition: opacity 0.3s ease;">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 20px; color: var(--primary);">Contact</h4>
+                <p style="margin-bottom: 15px; opacity: 0.7; display: flex; align-items: center;">
+                    <i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--primary);"></i>
+                    123 Tech Park, Silicon Valley
+                </p>
+                <p style="margin-bottom: 15px; opacity: 0.7; display: flex; align-items: center;">
+                    <i class="fas fa-envelope" style="margin-right: 10px; color: var(--primary);"></i>
+                    hello@excellearn.com
+                </p>
+                <p style="opacity: 0.7; display: flex; align-items: center;">
+                    <i class="fas fa-phone-alt" style="margin-right: 10px; color: var(--primary);"></i>
+                    +1 (555) 123-4567
+                </p>
+            </div>
+            
+            <div>
+                <h4 style="margin-bottom: 20px; color: var(--primary);">Newsletter</h4>
+                <p style="opacity: 0.7; margin-bottom: 15px;">Subscribe to get updates on new courses and features.</p>
+                <div style="display: flex;">
+                    <input type="email" placeholder="Your Email" style="padding: 12px 15px; border: none; border-radius: 50px 0 0 50px; width: 70%;">
+                    <button style="padding: 12px 20px; background: var(--primary); color: white; border: none; border-radius: 0 50px 50px 0; cursor: pointer;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+            <p style="opacity: 0.7;">© 2023 ExcelLearn. All rights reserved.</p>
+            <div style="display: flex; gap: 15px;">
+                <a href="#" style="color: white; font-size: 1.2rem; opacity: 0.7; transition: opacity 0.3s ease;"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" style="color: white; font-size: 1.2rem; opacity: 0.7; transition: opacity 0.3s ease;"><i class="fab fa-twitter"></i></a>
+                <a href="#" style="color: white; font-size: 1.2rem; opacity: 0.7; transition: opacity 0.3s ease;"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" style="color: white; font-size: 1.2rem; opacity: 0.7; transition: opacity 0.3s ease;"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 20px rgba(108, 99, 255, 0.3); cursor: pointer; z-index: 1000; animation: floating 3s ease-in-out infinite;">
+        <i class="fas fa-comment-dots" style="color: white; font-size: 1.5rem;"></i>
+    </div>
+</body>
+</html>

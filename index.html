@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Students - Stay updated with the latest trends in study, technology and coding.">
+    <title>ExcelLearn</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/lib/nav.css">
+    <script src="js/vendor/modernizr.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="nav__logo">
+                <a href="index.html">ExcelLearn</a>
+            </div>
+            <ul class="nav__menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav__cta">
+                <a href="#" class="btn" id="enroll-btn">Log-In</a>
+            </div>
+            <div class="nav__toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Unlock Your Potential with ExcelLearn</h1>
+            <p>Transform your career with cutting-edge education, expert mentorship, and hands-on learning.</p>
+            <a href="#" class="btn btn-primary">Get Enrolled</a>
+        </section>
+
+        <section class="about">
+            <h2>Why Choose ExcelLearn?</h2>
+            <p>At ExcelLearn, we believe in empowering students with real-world skills. Our courses are designed to
+                bridge the gap between academic learning and industry needs.</p>
+            <ul class="about__features">
+                <li>10,000+ successful graduates</li>
+                <li>Industry-focused curriculum</li>
+                <li>Hands-on projects & internships</li>
+                <li>Global career opportunities</li>
+            </ul>
+        </section>
+
+        <section class="programs">
+            <h2>Explore Our Top Courses</h2>
+            <div class="programs__grid">
+                <div class="program">
+                    <h3>Full Stack Web Development</h3>
+                    <p>Master front-end and back-end technologies with hands-on projects.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="program">
+                    <h3>Data Science & AI</h3>
+                    <p>Build a career in AI, machine learning, and big data analytics.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+                <div class="program">
+                    <h3>Business & Digital Marketing</h3>
+                    <p>Develop skills in branding, SEO, and social media marketing.</p>
+                    <a href="#" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>What Our Students Say</h2>
+            <div class="testimonial">
+                <p>"ExcelLearn transformed my career! The hands-on approach and expert guidance helped me land a top
+                    tech job." - <strong>Sarah M.</strong></p>
+            </div>
+            <div class="testimonial">
+                <p>"The best learning experience with real-world projects and top industry mentors." - <strong>John
+                        D.</strong></p>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2>Join ExcelLearn Today!</h2>
+            <p>Get access to top-quality education, mentorship, and career guidance.</p>
+            <a href="#" class="btn btn-primary">Start Your Journey</a>
+        </section>
+    </main>
+    <div id="login-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="login-close">&times;</span>
+            <h3>Login</h3>
+            <form id="login-form">
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" placeholder="Enter your email" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="register-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" id="register-close">&times;</span>
+            <h3>Register</h3>
+            <form id="register-form">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" placeholder="Enter your first name" required>
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" placeholder="Enter your last name" required>
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" placeholder="Enter your email" required>
+                <label for="register-password">Password:</label>
+                <input type="password" id="register-password" placeholder="Enter your password" required>
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+                <label for="program">Program:</label>
+                <select id="program">
+                    <option value="full-stack">Full Stack Web Development</option>
+                    <option value="data-science">Data Science & AI</option>
+                    <option value="marketing">Business & Digital Marketing</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__brand">
+                <h2>ExcelLearn</h2>
+            </div>
+            <div class="footer__section">
+                <h3>USEFUL LINKS</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer__section">
+                <h3>OFFICES</h3>
+                <p>1<sup>st</sup> Floor, ABC Building, New York, USA.</p>
+            </div>
+            <div class="footer__section">
+                <h3>INFORMATION</h3>
+                <p>Provide best quality education with 10000+ pass out students.</p>
+            </div>
+            <div class="footer__newsletter">
+                <h3>NEWSLETTER</h3>
+                <input type="email" placeholder="Enter your email">
+                <button>SUBSCRIBE</button>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <div class="footer__contact">
+                <p><i class="fas fa-map-marker-alt"></i>Location: New York, USA</p>
+                <p><i class="fas fa-envelope"></i> excellearn@gmail.com</p>
+                <p><i class="fas fa-phone"></i> Call +00 1234567890</p>
+            </div>
+            <div class="footer__social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
